@@ -179,7 +179,7 @@
     </customfield-searcher>
 
     <customfield-searcher key="release-searcher-ideo"
-                          name="Turaz Free Text Searcher" class="com.atlassian.jira.issue.customfields.searchers.TextSearcher">
+                          name="Custom Release Management Free Text Searcher" class="com.atlassian.jira.issue.customfields.searchers.TextSearcher">
         <description key="admin.customfield.searcher.textsearcher.desc">
             Search for Release using a free text
             search.
@@ -195,7 +195,7 @@
 
 
     <customfield-searcher key="version-daterange"
-                          name="Turaz Date Version picker"
+                          name="Custom Release Management Date Version picker"
                           class="com.atlassian.jira.issue.customfields.searchers.DateRangeSearcher">
         <description key="admin.customfield.searcher.daterange.desc">Allow searching for a date that
             is between two other dates

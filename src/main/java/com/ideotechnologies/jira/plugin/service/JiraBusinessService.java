@@ -18,7 +18,7 @@ import java.util.List;
  * @version 2.1
  * @description This class provide all business method for modules in this plugins,
  * as a service on 3-tiers system.This allows to separate treatment related to 
- * the Turaz business logic of the other treatments.
+ * the Custom Release Management business logic of the other treatments.
  */
 public class JiraBusinessService {
 
