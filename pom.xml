@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>com.atlassian.jira</groupId>
-            <artifactId>jira-api</artifactId>
+            <artifactId>atlassian-jira</artifactId>
             <version>${jira.version}</version>
             <scope>provided</scope>
         </dependency>
@@ -78,7 +78,7 @@
     </build>
 
     <properties>
-        <jira.version>5.0</jira.version>
+        <jira.version>5.1</jira.version>
         <amps.version>3.11</amps.version>
     </properties>
 

@@ -1,0 +1,3 @@
+#if ($value)
+<span title="$dateFieldFormat.format($value)">$dateFieldFormat.format($value)</span>
+#end 

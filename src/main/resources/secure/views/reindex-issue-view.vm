@@ -1,0 +1,13 @@
+<h3>Re-indexing related issues</h3>
+<form name="inputredirect" action="ReindexRelatedIssueAction.jspa" method="post">
+<div class="aui-message closeable shadowed">
+    <p class="title">
+        <span class="aui-icon icon-success"></span>
+        <strong>Success</strong>
+    </p>
+    <p>Re-indexing done!</p>
+</div><br/>
+<input type="submit" value="Back to previous issue" />
+<input type="hidden" name="issueId" value="$action.getIssueId()">
+ ##<a href="$action.redirect()">Back to previous issue</a> 
+ </form>

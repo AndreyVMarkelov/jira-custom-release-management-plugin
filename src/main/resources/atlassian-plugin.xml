@@ -83,5 +83,153 @@
         </actions>
     </webwork1>
 
+    <customfield-type key="version-issue-date" name="Version Date CF Type"
+                      class="com.ideotechnologies.jira.plugin.fields.customfields.VersionDateCalculatedCF">
+        <description>Version date retrieved from a Version Issue </description>
+        <resource type="velocity" name="column-view"
+                  location="templates/plugins/fields/view/view-date-field.vm" />
+        <resource type="velocity" name="view"
+                  location="templates/plugins/fields/view/view-date-field.vm" />
+        <resource type="velocity" name="xml"
+                  location="templates/plugins/fields/xml/xml-view-date-field.vm" />
+    </customfield-type>
+
+    <customfield-type key="release-issue-summary" name="Release Summary CF Type"
+                      class="com.ideotechnologies.jira.plugin.fields.customfields.ReleaseSummaryCalculatedCF">
+        <description>Release Summary retrieved from a Release Issue Type
+        </description>
+        <resource type="velocity" name="column-view"
+                  location="templates/plugins/fields/view/view-field.vm" />
+        <resource type="velocity" name="view"
+                  location="templates/plugins/fields/view/view-field.vm" />
+        <resource type="velocity" name="xml"
+                  location="templates/plugins/fields/xml/xml-view-field.vm" />
+    </customfield-type>
+
+    <customfield-type key="parent-issue-field" name="Parent Issue Field CF Type"
+                      class="com.ideotechnologies.jira.plugin.fields.customfields.ParentIssueFieldCalculatedCF">
+        <description> Display parent field in a subtask </description>
+        <resource type="velocity" name="column-view"
+                  location="templates/plugins/fields/view/view-field.vm" />
+        <resource type="velocity" name="view"
+                  location="templates/plugins/fields/view/view-field.vm" />
+        <resource type="velocity" name="xml"
+                  location="templates/plugins/fields/xml/xml-view-field.vm" />
+    </customfield-type>
+
+    <customfield-type key="parent-date-issue-field-release"
+                      name="Release Date CF Type"
+                      class="com.ideotechnologies.jira.plugin.fields.customfields.ReleaseDateCalculatedCF">
+        <description>Release Date retrieved from a Release Issue Type
+        </description>
+        <resource type="velocity" name="column-view"
+                  location="templates/plugins/fields/view/view-date-field.vm" />
+        <resource type="velocity" name="view"
+                  location="templates/plugins/fields/view/view-date-field.vm" />
+        <resource type="velocity" name="xml"
+                  location="templates/plugins/fields/xml/xml-view-date-field.vm" />
+    </customfield-type>
+
+    <webwork1 key="genericconfigaction" name="Version Date configuration action"
+              class="java.lang.Object">
+        <description>
+            Action to edit a Version Date CF Type for
+            configuration.
+        </description>
+        <actions>
+            <action
+                    name="com.ideotechnologies.jira.plugin.webwork.action.ConfigureVersionDateCFAction"
+                    alias="EditVersionDateCFConfig">
+                <view name="input">
+                    /secure/admin/views/customfields/edit-versiondatecf-config.vm
+                </view>
+            </action>
+        </actions>
+    </webwork1>
+
+    <webwork1 key="releaseconfigaction" name="Release Summary configuration action"
+              class="java.lang.Object">
+        <description>
+            Action to edit Release Summary CF Type for configuration
+        </description>
+        <actions>
+            <action
+                    name="com.ideotechnologies.jira.plugin.webwork.action.ConfigureReleaseSummaryCFAction"
+                    alias="EditReleaseSummaryCFConfig">
+                <view name="input">
+                    /secure/admin/views/customfields/edit-release-config.vm
+                </view>
+            </action>
+        </actions>
+    </webwork1>
+
+    <!-- searcher redendant,à supprimer et réajuster les config searcher des CF correspandants -->
+    <customfield-searcher key="parentissue-searcher-ideo"
+                          name="Parent Field Bug Searcher" class="com.atlassian.jira.issue.customfields.searchers.TextSearcher">
+        <description key="admin.customfield.searcher.textsearcher.desc">
+            Search for parent field bug using a free
+            text search.
+        </description>
+        <resource type="velocity" name="search"
+                  location="templates/plugins/fields/edit-searcher/" />
+        <resource type="velocity" name="view"
+                  location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm" />
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}"
+                                key="parent-issue-field" />
+    </customfield-searcher>
+
+    <customfield-searcher key="release-searcher-ideo"
+                          name="Turaz Free Text Searcher" class="com.atlassian.jira.issue.customfields.searchers.TextSearcher">
+        <description key="admin.customfield.searcher.textsearcher.desc">
+            Search for Release using a free text
+            search.
+        </description>
+        <resource type="velocity" name="search"
+                  location="templates/plugins/fields/edit-searcher/search-basictext.vm" />
+        <resource type="velocity" name="view"
+                  location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm" />
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}"
+                                key="release-issue-summary" />
+
+    </customfield-searcher>
+
+
+    <customfield-searcher key="version-daterange"
+                          name="Turaz Date Version picker"
+                          class="com.atlassian.jira.issue.customfields.searchers.DateRangeSearcher">
+        <description key="admin.customfield.searcher.daterange.desc">Allow searching for a date that
+            is between two other dates
+        </description>
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}"
+                                key="version-issue-date" />
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}"
+                                key="parent-date-issue-field-release" />
+    </customfield-searcher>
+
+    <web-item key="reindex-related-issues" name="Re-index Related Issues"
+              section="operations-operations" weight="100">
+        <label>Re-index related issues</label>
+        <tooltip>Re-index related issues</tooltip>
+        <link linkId="reindex-related-issues">/secure/ReindexRelatedIssueAction!default.jspa?id=$!{issue.id}
+        </link>
+        <condition
+                class="com.ideotechnologies.jira.plugin.webwork.action.conditions.IsVersionOrReleaseIssueCondition" />
+    </web-item>
+
+    <webwork1 key="ideo-reindex-related-issues" name="Reindex related issuesaction"
+              class="java.lang.Object">
+        <description>
+            Action to re-index issues related to current issues
+        </description>
+        <actions>
+            <action
+                    name="com.ideotechnologies.jira.plugin.webwork.action.ReindexRelatedIssueAction"
+                    alias="ReindexRelatedIssueAction">
+                <view name="success">/secure/views/reindex-issue-view.vm</view>
+                <view name="error">/secure/views/error-reindex-issue-view.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
 
 </atlassian-plugin>

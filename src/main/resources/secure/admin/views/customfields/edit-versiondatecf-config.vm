@@ -1,0 +1,11 @@
+<html>
+<body>
+<form name="input" action="EditVersionDateCFConfig.jspa" method="post">
+Project Version Id : <input type="text" id="projectVersionId" name="projectVersionId" value="$action.getProjectId()" /><br />
+Issue Type Id  : <input type="text" id="issueTypeId" name="issueTypeId" value="$action.getIssueTypeId()" /><br />
+Field Id to expect : <input type="text" id="fieldId" name="fieldId" value="$action.getFieldId()" /><br />
+<input type="submit" value="Submit" />
+<input type="hidden" name="fieldConfigId" value="$fieldConfigId">
+</form> 
+</body>
+</html>

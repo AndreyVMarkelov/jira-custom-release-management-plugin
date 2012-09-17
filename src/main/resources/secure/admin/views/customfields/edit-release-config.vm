@@ -1,0 +1,10 @@
+<html>
+<body>
+<form name="input" action="EditReleaseSummaryCFConfig.jspa" method="post">
+Project Version Id : <input type="text" id="projectVersionId" name="projectVersionId" value="$action.getProjectId()" /><br />
+Issue Type Id  : <input type="text" id="issueTypeId" name="issueTypeId" value="$action.getIssueTypeId()" /><br />
+<input type="submit" value="Submit" />
+<input type="hidden" name="fieldConfigId" value="$fieldConfigId">
+</form> 
+</body>
+</html>
