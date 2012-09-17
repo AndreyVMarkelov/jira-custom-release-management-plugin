@@ -1,0 +1,87 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+    <web-resource name="Custom Release Management Resources Plugin" key="custom-release-management-resources-plugin">
+        <resource name="AddLine.js" type="download" location="javascript/AddLine.js"/>
+        <context>atl.admin</context>
+    </web-resource>
+
+    <workflow-function key="subtask-creation-function"
+                       name="Automatic Subtask Creation Function"
+                       class="com.ideotechnologies.jira.plugin.workflow.function.WorkFlowAutoSubTaskCreationFactory">
+        <description>A post function to create a subtask by appending the parent summary with a configurable string</description>
+        <function-class>com.ideotechnologies.jira.plugin.workflow.function.ValidatorSubTaskCreation
+        </function-class>
+        <resource type="velocity" name="view"
+                  location="secure/admin/views/workflow/autosubtaskcreation-view.vm" />
+        <resource type="velocity" name="input-parameters"
+                  location="secure/admin/views/workflow/autosubtaskcreation-edit.vm" />
+        <resource type="velocity" name="edit-parameters"
+                  location="secure/admin/views/workflow/autosubtaskcreation-edit.vm" />
+        <orderable>true</orderable>
+        <deletable>true</deletable>
+        <unique>false</unique>
+    </workflow-function>
+
+    <workflow-function key="projectversion-creation-function"
+                       name="Automatic Project Version Creation Function"
+                       class="com.atlassian.jira.plugin.workflow.WorkflowNoInputPluginFactory">
+        <description>A post function to create a project version with the summary of the issue</description>
+        <function-class>com.ideotechnologies.jira.plugin.workflow.function.ValidatorProjectVersionCreation
+        </function-class>
+        <resource type="velocity" name="view"
+                  location="secure/admin/views/workflow/autoprojectversioncreation-view.vm" />
+        <orderable>true</orderable>
+        <deletable>true</deletable>
+        <unique>true</unique>
+    </workflow-function>
+
+    <workflow-validator key="version-exist-validator"
+                        name="Version Validator" class="com.ideotechnologies.jira.plugin.workflow.validator.WorkFlowVersionExistValidatorFactory">
+        <description>
+            A validator to check if version exist in project version
+        </description>
+        <validator-class>
+            com.ideotechnologies.jira.plugin.workflow.validator.ValidatorIsVersionExist
+        </validator-class>
+        <resource type="velocity" name="view"
+                  location="templates/plugins/validator/view/exist-version-view.vm" />
+    </workflow-validator>
+
+    <web-section key="custom-release-management-admin-section" name="Custom Release Management Plugin Section"
+                 location="admin_plugins_menu" weight="900">
+        <label>Custom Release Management Plugin</label>
+        <description>Custom Release Management Section </description>
+    </web-section>
+
+    <web-item key="custom-release-management-admin-link" name="Custom Release Management Plugin Link"
+              section="admin_plugins_menu/custom-release-management-admin-section" weight="10">
+        <label>Configure plugin properties</label>
+        <link linkId="customreleasemanagement.plugin.admin.link">/secure/admin/ConfigureCustomReleaseManagementPluginAction!default.jspa</link>
+        <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
+            <param name="permission">admin</param>
+        </condition>
+    </web-item>
+
+    <webwork1 key="custom-release-management-configure-plugin" name="Configure Custom Release Management Plugin Properties"
+              class="java.lang.Object">
+        <description>
+            Action to configure the Custom Release Management Plugin properties
+        </description>
+        <actions>
+            <action
+                    name="com.ideotechnologies.jira.plugin.webwork.action.ConfigureCustomReleaseManagementPluginAction"
+                    alias="ConfigureCustomReleaseManagementPluginAction">
+                <view name="input">/secure/admin/plugin/custom-release-management-plugin-config.vm</view>
+                <view name="error">/secure/admin/plugin/custom-release-management-plugin-config.vm</view>
+                <view name="permissionviolation">/secure/admin/plugin/permissionviolation.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
+
+</atlassian-plugin>

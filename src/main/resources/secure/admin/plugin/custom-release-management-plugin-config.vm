@@ -1,0 +1,54 @@
+<h3>
+    Custom Release Management Plugin Configuration
+</h3>
+<form action="ConfigureCustomReleaseManagementPluginAction.jspa" method="post" class="aui">
+    #*@declare id="form_properties"*#<label for="form_properties">Enter project version key and all related projects key separate by comma (Exemple : KPTPV --> KPTP,KPTP1,KPTP2).</label>
+    <table id="config-table-main" class="aui">
+        <thead>
+        <tr>
+            <th id="project-version-key">Project Version Key</th>
+            <th id="projects-key">Project Keys</th>
+            <th id="projects-extension">Project Extensions</th>
+            <th id="action">Action</th>
+        </tr>
+        </thead>
+
+        <tbody id="config-table-body">
+        <script><!--
+            #foreach($key in $action.getMapInputs().keySet())
+                #set ($keyString = "${key}_ext")
+            ##addLine();
+
+            var tableElmt = document.getElementById("config-table-main");
+            var rowsNb = tableElmt.rows.length;
+            rowsNb--;
+            var template =
+                    "<td headers='name'><input id='input_"+rowsNb+"_0' name='input_"+rowsNb+"_0' value ='$!key' type='text' class='text'  /></td>"+
+                            "<td headers='type'><input id='input_"+rowsNb+"_1' name='input_"+rowsNb+"_1' value ='$!action.getMapInputs().get($key)' type='text' class='text' /></td>"+
+                            "<td headers='type'><input id='input_"+rowsNb+"_2' name='input_"+rowsNb+"_2' value ='$!action.getMapExtensions().get($keyString)' type='text' class='text' /></td>"+
+                            "<td class='action' headers='action'>"+
+                            "<ul class='menu' style = 'list-style-type: none; margin: 0;padding : 0;margin-top: 0;text-align: left;'>"+
+                            "<li>"+
+                            "<a href='#' onclick='removeLine(event); return false;'>Remove</a>"+
+                            "</li>"+
+                            "</ul>"+
+                            "</td>";
+
+            var tableBodyElmt = document.getElementById("config-table-main").tBodies[0];
+            var trTag = document.createElement("tr");
+            tableBodyElmt.appendChild(trTag);
+            trTag.innerHTML = template;
+
+            #end
+        --></script>
+        </tbody>
+
+    </table>
+    <input class="button" type="button" value="&nbsp;Add New Line&nbsp;" onclick="addLine()"/> <br/><br/>
+    <label for="issuetypes_name">Enter Release issueType Id and Version IssueType Id for enabling re-index action (2 values max, separate by comma) :</label>
+    <input id='issuetypes_name' name='issuetypes_name' value ='$!action.getReIndexInputValues()' type='text' class='text'  /><br/>
+
+
+    <input class="button" type="submit" value="Submit Form">
+    <a  onclick="location.reload(); return false;" class="cancel" href="#">Cancel</a>
+</form>

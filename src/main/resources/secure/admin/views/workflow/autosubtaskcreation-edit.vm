@@ -1,0 +1,12 @@
+<tr bgcolor="#ffffff">
+    <td align="right" valign="top" bgcolor="#fffff0">
+        <span class="label">SubIssue Type Id :</span>
+    </td>
+    <td bgcolor="#ffffff" nowrap="">
+        <input type="text" name="subIssueTypeId" value="$subIssueTypeId"/>
+        <br>
+        <font size="1">
+            Enter the Id of the subissue type
+        </font>
+    </td>
+</tr>

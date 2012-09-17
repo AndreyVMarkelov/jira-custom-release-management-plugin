@@ -1,0 +1,3 @@
+#if ($subIssueTypeId)
+Create a subtask with issuetype ID set to : $subIssueTypeId
+#end
