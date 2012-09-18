@@ -1,11 +1,6 @@
 package com.ideotechnologies.jira.plugin.fields.customfields;
 
-import java.util.List;
-
-import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.customfields.customfieldvalue.CustomFieldValue;
-import com.atlassian.jira.issue.customfields.impl.FieldValidationException;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.config.FieldConfig;
 import com.atlassian.jira.issue.fields.config.FieldConfigItemType;
@@ -13,6 +8,8 @@ import com.atlassian.jira.project.version.Version;
 import com.ideotechnologies.jira.plugin.fields.fieldconfig.ParentFieldCFConfig;
 import com.ideotechnologies.jira.plugin.service.JiraBusinessService;
 import com.ideotechnologies.jira.plugin.service.dao.GenericValueDAO;
+
+import java.util.List;
 
 public class ParentIssueFieldCalculatedCF extends AbstractGenericCalculatedCF {
 
