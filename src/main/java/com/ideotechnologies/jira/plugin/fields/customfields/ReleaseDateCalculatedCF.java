@@ -1,27 +1,20 @@
 package com.ideotechnologies.jira.plugin.fields.customfields;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import org.ofbiz.core.entity.GenericEntityException;
-
 import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.component.ComponentAccessor;
-import com.atlassian.jira.datetime.DateTimeFormatter;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.customfields.impl.FieldValidationException;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.DateField;
 import com.atlassian.jira.issue.fields.config.FieldConfig;
 import com.atlassian.jira.issue.fields.config.FieldConfigItemType;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.util.DateFieldFormat;
-import com.atlassian.util.concurrent.LazyReference;
 import com.ideotechnologies.jira.plugin.fields.fieldconfig.VersionDateCFConfig;
 import com.ideotechnologies.jira.plugin.service.JiraBusinessService;
 import com.ideotechnologies.jira.plugin.service.dao.GenericValueDAO;
-import com.ideotechnologies.jira.plugin.utils.helpers.UtilsHelper;
+
+import java.util.List;
+import java.util.Map;
 
 public class ReleaseDateCalculatedCF extends AbstractGenericCalculatedCF
 		implements DateField {
@@ -41,37 +34,32 @@ private JiraBusinessService jiraBusinessService ;
 		if (issue == null) {//For reindexing
 			return "";
 		}
-	
-			/*//TODO log pertinent avant l'envoi de la valeur null
-			//log :Fix version non renseignee
+
+			/*/
+			//log : Fix version not set
 			if(getFirstFixVersionByIssue(issue)== null){return null;}*/
-			
-			//TODO log pertinent avant l'envoi de la valeur null
-			//log : issue version associe a l'issue introuvable
+
+			//log : version issue related to current issue not found
 			issueSelected = jiraBusinessService.getIssueSubtaskByFirstFixVersion(issue, field);
 			if(issueSelected == null){
 				return null;
 				}
-			/*//TODO log pertinent avant l'envoi de la valeur null
-			//log : L'issue n'est pas une subtask
-			//Partie traitement business a mettre dans #getIssueSubtaskByFirstFixVersion
+			/*
+			// log : issue is not a subtask
 			if(!issueSelected.isSubTask())return null;*/
-			
-			//TODO Partie business move to #getFeldValueFromIssue ans #getParentIssue
+
 			Issue parentIssue = issueSelected.getParentObject();
 			//FieldConfig fieldConfig = field.getRelevantConfig(issue);
 			//jiraBusinessService.getFieldValueFromIssue(parentIssue, fieldConfig)	;
 			FieldConfig fieldConfig = field.getRelevantConfig(issue);
-			
-			//TODO log pertinent avant l'envoi de la valeur null
+
 			//log warn: fieldconfig is null
 			if(fieldConfig == null)return null; //Resolve anomalies about issue link
 			
 			CustomField cf = ComponentManager.getInstance().getCustomFieldManager().getCustomFieldObject(
 					GenericValueDAO.getFieldToDisplayId(fieldConfig.getId()));
-			
-			//TODO log pertinent avant l'envoi de la valeur null
-			//log : Le champ customfoeld_xxx n'est pas renseigne
+
+			//log : Custom field value not set
 			if(!cf.hasValue(parentIssue)){
 				return null;
 			}

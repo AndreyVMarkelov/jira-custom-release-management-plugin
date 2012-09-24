@@ -59,48 +59,15 @@ public class ReindexRelatedIssueAction extends JiraWebActionSupport {
 		
 		return "success";
 	}
-	
-	
-	
-/*	 public Properties getProjectKeyProperties(){
-		 Properties properties = new Properties();
-		 InputStream stream = ClassLoaderUtils.getResourceAsStream(PROPERTIES_FILE, ReindexRelatedIssueAction.class);
-		 if( stream == null )
-			{
-				URL resource = ClassLoaderUtils.getResource( PROPERTIES_FILE, ReindexRelatedIssueAction.class );
-				File propFile = new File( resource.getFile() );
-				try {
-					stream = new FileInputStream( propFile );
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		 if (stream != null)
-			{
-				try {
-					properties.load( stream );
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	 }
-		 try {
-			stream.close(); //verifier si necessaire
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	return properties;	 
-}*/
+
 	 
 	 public void reIndexForVersions(Issue issue){
 
-		// Properties prop = getProjectKeyProperties(); //Chargement du fichier properties
+
 		 Map<String,String> prop = CustomReleaseManagementPropertiesDAOService.getInputPropertiesMap();
 		 String summary = issue.getSummary();
 		 String projectVersionKey = issue.getProjectObject().getKey();
-		 String propValue = prop.get(projectVersionKey); //Recuperation de la key du projet mappe
+		 String propValue = prop.get(projectVersionKey); // Recuperation of the mapped project key
 		 if(propValue == null){
 			 return;}
 		 String[] arrayPropValue = propValue.split(",");
@@ -111,13 +78,12 @@ public class ReindexRelatedIssueAction extends JiraWebActionSupport {
 		 for (String keyProjectValue : listPropValue) {
 			 Project project = componentManager.getProjectManager().getProjectObjByKey(keyProjectValue.trim());
 			 try {
-				 if(project == null){return;}//TODO Ameliorer la gestion des cas d'exception (log,traces)
+				 if(project == null){return;}
 				 issueIds = (List<Long>) componentManager.getIssueManager().getIssueIdsForProject(project.getId());
 			 } catch (GenericEntityException e) {
-				 // TODO Auto-generated catch block
 				 e.printStackTrace();
 			 }
-			 if(issueIds.isEmpty())return ;//TODO Ameliorer la gestion des cas d'exception (log,traces)
+			 if(issueIds.isEmpty())return ;
 			 List<Issue> issuesSelected = new ArrayList<Issue>();
 			 for (Long issueId : issueIds) {
 				 Issue issueSelected = componentManager.getIssueManager().getIssueObject(issueId);
@@ -126,13 +92,7 @@ public class ReindexRelatedIssueAction extends JiraWebActionSupport {
 					 issuesSelected.add(issueSelected);
 				 }
 			 }
-			 /*for (Long issueId : issueIds) {
-				 Issue issueSelected = componentManager.getIssueManager().getIssueObject(issueId);
-				 fixVersions = (List<Version>) issueSelected.getFixVersions();
-				 if(!fixVersions.isEmpty() && fixVersions.get(0).getName().equals(summary)){
-					 reIndexIssue(issueSelected);
-				 }
-			 }*/
+
 			 reIndexIssues(issuesSelected);
 		 }
 
@@ -152,7 +112,6 @@ public class ReindexRelatedIssueAction extends JiraWebActionSupport {
              try {
 				issueIndexManager.reIndex(issueObject);
 			} catch (IndexException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
          } else {
@@ -160,7 +119,6 @@ public class ReindexRelatedIssueAction extends JiraWebActionSupport {
              try {
 				issueIndexManager.reIndex(issueObject);
 			} catch (IndexException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
              finally {
@@ -175,7 +133,6 @@ public class ReindexRelatedIssueAction extends JiraWebActionSupport {
              try {
 				issueIndexManager.reIndexIssueObjects(issueObjects);
 			} catch (IndexException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
          } else {
@@ -183,7 +140,6 @@ public class ReindexRelatedIssueAction extends JiraWebActionSupport {
              try {
 				issueIndexManager.reIndexIssueObjects(issueObjects);
 			} catch (IndexException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
              finally {
@@ -202,10 +158,7 @@ public class ReindexRelatedIssueAction extends JiraWebActionSupport {
 	public String getIssueId(){
 		 return issueId;
 	 }
-	/* public String getIssueKey(){
-		String issueKey = ComponentManager.getInstance().getIssueManager().getIssueObject(Long.valueOf(issueId)).getKey();
-		return issueKey;
-	 }*/
+
 	 public String redirect(){
 		 String issueId = request.getParameter("issueId");
 		 String issueKey = ComponentManager.getInstance().getIssueManager().getIssueObject(Long.valueOf(issueId)).getKey();

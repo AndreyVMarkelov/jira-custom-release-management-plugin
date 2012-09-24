@@ -32,7 +32,6 @@ public class ValidatorIsVersionExist implements Validator {
 				try {
 					stream = new FileInputStream( propFile );
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -41,14 +40,12 @@ public class ValidatorIsVersionExist implements Validator {
 				try {
 					properties.load( stream );
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	 }
 		 try {
-			stream.close(); //verifier si necessaire
+			stream.close(); // check if necessary
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	return properties;	 
@@ -62,7 +59,7 @@ public class ValidatorIsVersionExist implements Validator {
 		IssueManager issueManager = null ;
 		Issue issueExpected = (Issue) transientVars.get("issue");
 		Project project = issueExpected.getProjectObject();
-		 Properties prop = getProjectKeyProperties(); //Chargement du fichier properties
+		 Properties prop = getProjectKeyProperties();  // Load the property file
 		 Set<String> projectVersions = prop.stringPropertyNames();
 		 String selectedProjectVersionKey = null;
 		 for (String projectVersion : projectVersions) {
@@ -81,11 +78,10 @@ public class ValidatorIsVersionExist implements Validator {
 		 issueManager = ComponentManager.getInstance().getIssueManager();
 		ProjectManager projectManager = ComponentManager.getInstance().getProjectManager();
 		Project projectVersion = projectManager.getProjectObjByKey(selectedProjectVersionKey);
-		if(projectVersion == null)return; //Cas ou la key de project version recupere n'existe pas
+		if(projectVersion == null)return; // Case where the linked project version key doesn't exist
 		try {
 			issueVersionIds = (List<Long>) issueManager.getIssueIdsForProject(projectVersion.getId());
 		} catch (GenericEntityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		List<Version> versionsList = (List<Version>) issueExpected.getFixVersions();

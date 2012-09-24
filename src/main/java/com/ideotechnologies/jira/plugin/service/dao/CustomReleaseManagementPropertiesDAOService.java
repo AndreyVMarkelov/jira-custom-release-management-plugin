@@ -26,8 +26,8 @@ public class CustomReleaseManagementPropertiesDAOService {
 		ofbizArgs.put("delegator.name", "default");
 		ofbizArgs.put("entityName", "CustomReleaseManagementPluginProperties");
 		ofbizArgs.put("entityId", ENTITY_ID);
-		PropertySet ofbizPs = PropertySetManager.getInstance("ofbiz", ofbizArgs);//ofbiz --> declarer dans le fichier propertyset.xml
-																					//TODO verifier la bonne utilisation
+		PropertySet ofbizPs = PropertySetManager.getInstance("ofbiz", ofbizArgs);
+
 		return ofbizPs;
 
 	}
@@ -41,7 +41,7 @@ public class CustomReleaseManagementPropertiesDAOService {
                 dBMap.put(key, ps.getString(key));
             }
 		}
-		dBMap.remove("reIndexInputValues"); //Patch redendance (TODO ameliorer)
+		dBMap.remove("reIndexInputValues"); //Patch redendance
 		return dBMap;
 		
 	}
@@ -61,7 +61,7 @@ public class CustomReleaseManagementPropertiesDAOService {
 		PropertySet ps = getPS();
 		Set<String> inputSet = propertiesMap.keySet();
 		
-		//Traitement remove keys
+		// remove keys
 		Set<String> dBSet = getInputPropertiesMap().keySet();
 		for (String inputDB : dBSet) {
 			if(!inputSet.contains(inputDB)) ps.remove(inputDB);
@@ -77,7 +77,7 @@ public class CustomReleaseManagementPropertiesDAOService {
         PropertySet ps = getPS();
         Set<String> inputSet = propertiesMap.keySet();
 
-        //Traitement remove keys
+        // remove keys
         Set<String> dBSet = getExtensionPropertiesMap().keySet();
         for (String inputDB : dBSet) {
             if(!inputSet.contains(inputDB)) ps.remove(inputDB);

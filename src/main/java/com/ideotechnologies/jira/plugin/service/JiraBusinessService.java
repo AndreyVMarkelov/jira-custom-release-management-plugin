@@ -53,7 +53,7 @@ public class JiraBusinessService {
 		if(fieldConfig == null)return null; //Resolve anomalies about issue link
 		CustomField cf = getCustomFieldManager().getCustomFieldObject(
 				GenericValueDAO.getFieldToDisplayId(fieldConfig.getId()));
-		//TODO controle de la valuer de cf (si null traiter l'exception et log)
+
 		if(!cf.hasValue(issueSelected)){
 			return null;
 		}
@@ -73,10 +73,10 @@ public class JiraBusinessService {
 	 * @throws GenericEntityException
 	 */
 	public Issue getIssueSubtaskByFirstFixVersion(Issue issue,CustomField field) {
-		//TODO scinder la methode en plusieurs petites methodes
+
 		Issue issueSelected = null;
 		Version fixVersion;
-		//TODO log pertinent avant l'envoi de la valeur null
+
 		//log :Fix version non renseignee
 		if((fixVersion = getFirstFixVersionByIssue(issue))== null){return null;}
 		//Version fixVersion = getFirstFixVersionByIssue(issue);
@@ -88,7 +88,7 @@ public class JiraBusinessService {
 		try {
 			issueIds = (List<Long>) ComponentManager.getInstance().getIssueManager().getIssueIdsForProject(projectVersion.getId());
 		} catch (GenericEntityException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 
@@ -96,7 +96,7 @@ public class JiraBusinessService {
 			Issue issueExpected = ComponentManager.getInstance().getIssueManager().getIssueObject(issueId);
 			if(Long.valueOf(issueExpected.getIssueTypeObject().getId()).equals(GenericValueDAO.getIssueTypeId(fieldConfig.getId()))){
 				if(issueExpected.getSummary().equals(fixVersion.getName())){
-					//TODO log pertinent avant l'envoi de la valeur null
+
 					//log : L'issue n'est pas une subtask
 					if(!issueExpected.isSubTask()) return null;
 					issueSelected = issueExpected;

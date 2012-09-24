@@ -57,7 +57,6 @@ public class IssueCreatedUpdatedListener implements InitializingBean, Disposable
 		try {
 			issueIds = (List<Long>) componentManager.getIssueManager().getIssueIdsForProject(project.getId());
 		} catch (GenericEntityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		for (Long issueId : issueIds) {
@@ -68,8 +67,8 @@ public class IssueCreatedUpdatedListener implements InitializingBean, Disposable
 			}
 		}
 		}
-		//Pour chaque valeur du tableau recuperer les projets et reindexer les issues
-		//associe a la fix version et ainsi que les enfants des issues.
+		// For each value of the table, retrieve the related projects and reindex the issues
+		// related to the fix version and the issues children.
 		 
 		
 	 }
@@ -107,7 +106,6 @@ public class IssueCreatedUpdatedListener implements InitializingBean, Disposable
 				try {
 					stream = new FileInputStream( propFile );
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -116,14 +114,12 @@ public class IssueCreatedUpdatedListener implements InitializingBean, Disposable
 				try {
 					properties.load( stream );
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	 }
 		 try {
-			stream.close(); //verifier si necessaire
+			stream.close(); // check if necessary
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	return properties;	 
@@ -134,7 +130,6 @@ public class IssueCreatedUpdatedListener implements InitializingBean, Disposable
              try {
 				issueIndexManager.reIndex(issueObject);
 			} catch (IndexException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
          } else {
@@ -142,7 +137,6 @@ public class IssueCreatedUpdatedListener implements InitializingBean, Disposable
              try {
 				issueIndexManager.reIndex(issueObject);
 			} catch (IndexException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
              finally {

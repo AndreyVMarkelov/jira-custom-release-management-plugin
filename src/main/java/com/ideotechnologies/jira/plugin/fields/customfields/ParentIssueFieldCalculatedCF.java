@@ -39,7 +39,7 @@ private JiraBusinessService jiraBusinessService;
 			return parentSummary;
 			
 		case 1 : 
-			String parentKey = parentIssue.getKey();//TODO rename variable,not parent Id but parent key
+			String parentKey = parentIssue.getKey();
 			return parentKey;
 			
 		case 2 : 
@@ -47,7 +47,7 @@ private JiraBusinessService jiraBusinessService;
 			if(parentFixVersions.isEmpty())return null;
 			return parentFixVersions.get(0).getName();
 			
-		case 3 ://Warn,Ne traite pas les custumfield de type date et user evol...
+		case 3 ://Warn, don't handle the custom fields with type date and user...
 			 parentIssue = issue.getParentObject();
 			 Object customFieldValue = jiraBusinessService.getFieldValueFromIssue(parentIssue, fieldConfig);
 			/*CustomField cf = ComponentManager.getInstance().getCustomFieldManager().getCustomFieldObject(
@@ -57,7 +57,6 @@ private JiraBusinessService jiraBusinessService;
 				return null; // case where parent custom field value is not set
 			}
 			else {return parentIssue.getCustomFieldValue(cf).toString();}*/
-			 //TODO optimiser extraire le toString et le traiter ds le template
 			if(customFieldValue == null) return null;
 			return customFieldValue.toString();
 		default:

@@ -39,9 +39,9 @@ protected String doExecute() throws Exception {
     Map<String,String> updatedExtMap = new HashMap<String, String>(); // Map that stores project extensions for version creation
 
     int idCount = 0;
-	int paramRowsLength = 200; // TODO MaxProperties inputs accepte (arbitraire en attendant une meilleure implementation)
+	int paramRowsLength = 200;
 	String reIndexInputValues = request.getParameter("issuetypes_name");
-	for (int i = 0; i < (paramRowsLength/2); i++) { // '/2' --> lignes d'un emsembe de 2 parametres
+	for (int i = 0; i < (paramRowsLength/2); i++) { // '/2' --> lines of a set of 2 parameters
 		
 	if(request.getParameter("input_"+idCount+"_0") != null){
 		updatedMap.put(request.getParameter("input_"+idCount+"_0"), request.getParameter("input_"+idCount+"_1"));

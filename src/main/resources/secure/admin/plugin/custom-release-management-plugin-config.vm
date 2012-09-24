@@ -2,7 +2,7 @@
     Custom Release Management Plugin Configuration
 </h3>
 <form action="ConfigureCustomReleaseManagementPluginAction.jspa" method="post" class="aui">
-    #*@declare id="form_properties"*#<label for="form_properties">Enter project version key and all related projects key separate by comma (Exemple : KPTPV --> KPTP,KPTP1,KPTP2).</label>
+    #*@declare id="form_properties"*#<label for="form_properties">Enter project version key and all related projects key separate by comma (Example : KPTPV --> KPTP,KPTP1,KPTP2).</label>
     <table id="config-table-main" class="aui">
         <thead>
         <tr>
