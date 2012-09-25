@@ -77,7 +77,7 @@ public class IssueCreatedUpdatedListener implements InitializingBean, Disposable
 	 }
 	 
 	 /**
-	  * Called when the plugin is being disabled or removed.
+	  * Called when the plugins is being disabled or removed.
 	  * @throws Exception
 	  */
 	 @Override
@@ -87,7 +87,7 @@ public class IssueCreatedUpdatedListener implements InitializingBean, Disposable
 	 }
 
 	 /**
-	  * Called when the plugin has been enabled.
+	  * Called when the plugins has been enabled.
 	  * @throws Exception
 	  */
 	 @Override
