@@ -15,7 +15,7 @@
     </organization>
 
     <name>custom-release-management-plugin</name>
-    <description>This is the com.ideotechnologies.jira:custom-release-management-plugin plugin for Atlassian JIRA.</description>
+    <description>Extended Release Management for JIRA</description>
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
