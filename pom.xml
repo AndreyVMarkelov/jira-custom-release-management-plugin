@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ideotechnologies.jira</groupId>
     <artifactId>custom-release-management-plugin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1</version>
 
     <organization>
         <name>Ideo Technologies</name>
@@ -78,7 +78,7 @@
     </build>
 
     <properties>
-        <jira.version>5.1</jira.version>
+        <jira.version>5.2</jira.version>
         <amps.version>3.11</amps.version>
     </properties>
 
