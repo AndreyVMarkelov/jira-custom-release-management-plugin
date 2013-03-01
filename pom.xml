@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ideotechnologies.jira</groupId>
     <artifactId>custom-release-management-plugin</artifactId>
-    <version>1.1</version>
-
+    <version>1.2</version>
     <organization>
         <name>Ideo Technologies</name>
         <url>http://www.ideotechnologies.com/</url>
     </organization>
-
     <name>custom-release-management-plugin</name>
     <description>Extended Release Management for JIRA</description>
     <packaging>atlassian-plugin</packaging>
-
     <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.3</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>com.atlassian.jira</groupId>
             <artifactId>atlassian-jira</artifactId>
@@ -54,7 +54,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -76,10 +75,8 @@
             </plugin>
         </plugins>
     </build>
-
     <properties>
         <jira.version>5.2</jira.version>
-        <amps.version>3.11</amps.version>
+        <amps.version>4.1.4</amps.version>
     </properties>
-
 </project>

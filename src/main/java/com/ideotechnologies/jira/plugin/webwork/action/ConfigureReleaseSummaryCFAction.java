@@ -1,17 +1,21 @@
 package com.ideotechnologies.jira.plugin.webwork.action;
 
-import java.util.Collection;
-import java.util.regex.Pattern;
-
+import com.atlassian.jira.config.managedconfiguration.ManagedConfigurationItemService;
 import com.atlassian.jira.issue.fields.config.FieldConfig;
 import com.atlassian.jira.web.action.admin.customfields.AbstractEditConfigurationItemAction;
 import com.ideotechnologies.jira.plugin.service.dao.GenericValueDAO;
 import com.ideotechnologies.jira.plugin.utils.helpers.UtilsHelper;
 
-public class ConfigureReleaseSummaryCFAction extends
-		AbstractEditConfigurationItemAction {
+import java.util.Collection;
+import java.util.Map;
 
-	@Override
+public class ConfigureReleaseSummaryCFAction extends AbstractEditConfigurationItemAction {
+
+    protected ConfigureReleaseSummaryCFAction(ManagedConfigurationItemService managedConfigurationItemService) {
+        super(managedConfigurationItemService);
+    }
+
+    @Override
 	protected String doExecute() throws Exception {
 		
 		String projectIdInput = request.getParameter("projectVersionId");
@@ -44,4 +48,13 @@ public class ConfigureReleaseSummaryCFAction extends
 
 	}
 
+    @Override
+    public Collection<String> getErrorMessages() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Map<String, String> getErrors() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

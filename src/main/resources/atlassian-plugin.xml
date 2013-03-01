@@ -117,6 +117,22 @@
                   location="templates/plugins/fields/xml/xml-view-field.vm" />
     </customfield-type>
 
+    <webwork1 key="parentdisplayfieldconfig" name="Parent Field configuration action"
+              class="java.lang.Object">
+        <description>
+            Action to edit Parent Field CF Type for configuration
+        </description>
+        <actions>
+            <action
+                    name="com.ideotechnologies.jira.plugin.webwork.action.ConfigureParentFieldCFAction"
+                    alias="EditParentFieldCFConfig">
+                <view name="input">
+                    /secure/admin/views/customfields/edit-parentfield-config.vm
+                </view>
+            </action>
+        </actions>
+    </webwork1>
+
     <customfield-type key="parent-date-issue-field-release"
                       name="Release Date CF Type"
                       class="com.ideotechnologies.jira.plugin.fields.customfields.ReleaseDateCalculatedCF">

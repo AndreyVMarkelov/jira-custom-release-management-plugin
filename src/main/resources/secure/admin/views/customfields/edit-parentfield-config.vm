@@ -1,0 +1,45 @@
+<html>
+<head>
+
+    <script type="text/javascript">
+        function hideElement(event)
+        {
+            var target = event.currentTarget;
+            var elmt = document.getElementById("parentCFTypeId");
+            var isSelected = target.options[3].selected;
+            var label = document.getElementById("labelCF");
+            if(!isSelected){
+                label.style.display = "none";
+                elmt.setAttribute("type","hidden"); }
+            else{elmt.setAttribute("type","text");
+                label.style.display = "inline";}
+
+            function selectOption(){
+                var elmt = document.getElementById("parentOptionFieldTypeId");
+                elmt.options[$action.getFieldId()].selected =true;
+            }
+            window.onload = function () { selectOption(); }
+
+        }
+
+    </script>
+</head>
+
+<body >
+
+
+</script>
+<form name="input" action="EditParentFieldCFConfig.jspa" method="post">
+        <p>Select parent fied type to display :</p><br />
+<select id = "parentOptionFieldTypeId" name="parentOptionFieldTypeId"  onchange="hideElement(event)">
+        <option value="0">Summary</option>
+        <option value="1">Parent key</option>
+<option value="2">Fix Version</option>
+<option value="3">Parent custom field</option>
+        </select>
+<span id="labelCF" style="display : none">Parent Custom Field Type Id  : </span><input type="hidden" id="parentCFTypeId" name="parentCFTypeId" value="$action.getFieldId()" /><br />
+<input type="submit" value="Submit" />
+        <input type="hidden" name="fieldConfigId" value="$fieldConfigId">
+        </form>
+        </body>
+        </html>
